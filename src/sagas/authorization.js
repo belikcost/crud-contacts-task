@@ -6,6 +6,8 @@ import { setAuthorization } from "../redux/actions";
 
 function* authorization(action) {
     const result = yield call(authorizationFetch, action.payload);
+    localStorage.setItem('auth', JSON.stringify(result));
+
     yield put(setAuthorization(result));
 }
 
