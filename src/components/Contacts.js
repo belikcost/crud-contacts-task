@@ -12,9 +12,9 @@ export const Contacts = ({contacts, handleRemoveContact}) => {
         <div className="app_modal">
             <Link to="/contacts/create" className="app_add app_background">+</Link>
             {contacts ? contacts.length !== 0 ? (
-                <ListGroup variant="flush">
-                    {contacts.map(contact => (
-                        <ListGroup.Item key={contact.id}>
+                <ListGroup variant="flush" className="app__list">
+                    {contacts.map((contact, i) => (
+                        <ListGroup.Item key={i}>
                             <h5>{contact.title}</h5>
                             <p>{contact.phone}</p>
                             <Link to={`/contacts/edit/${contact.id}`}>

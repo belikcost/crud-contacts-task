@@ -1,12 +1,10 @@
-import { takeEvery, call, put } from 'redux-saga/effects';
+import { takeEvery, call } from 'redux-saga/effects';
 
 import { EDIT_CONTACT_REQUEST } from "../constants";
-import { editContactSuccess } from "../redux/actions";
 
 
 function* editContact(action) {
-    const result = yield call(editContactFetch, action.payload);
-    yield put(editContactSuccess(result));
+    yield call(editContactFetch, action.payload);
 }
 
 const editContactFetch = ({id, ...data}) => {

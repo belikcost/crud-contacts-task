@@ -4,6 +4,7 @@ import authorizationWatcher from "./authorization";
 import getContactsWatcher from "./contacts";
 import editContactWatcher from "./editContact";
 import removeContactWatcher from "./removeContact";
+import addContactWatcher from "./addContact";
 
 
 export default function* mainSaga() {
@@ -12,5 +13,6 @@ export default function* mainSaga() {
         call(getContactsWatcher),
         call(editContactWatcher),
         call(removeContactWatcher),
+        call(addContactWatcher),
     ]);
 }

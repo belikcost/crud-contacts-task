@@ -43,8 +43,28 @@
     justify-content: center;
     cursor: pointer;
     text-decoration: none;
+    z-index: 2;
     &,&:hover {
       color: #fff;
+    }
+  }
+  &__list {
+    overflow-y: auto;
+    max-height: 50vh;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .app_modal {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .app {
+    padding: .75rem;
+    &_modal {
+      width: 100%;
     }
   }
 }
