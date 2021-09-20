@@ -1,9 +1,7 @@
-import { useRouteMatch } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
 
-export const FormContact = ({data, setData, onSubmit}) => {
-    const match = useRouteMatch('/contacts/:id');
+export const FormContact = ({match, data, setData, onSubmit}) => {
 
     return (
         <div className="app_modal">

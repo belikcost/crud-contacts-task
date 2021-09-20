@@ -1,21 +1,25 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { authorizationRequest, editContactRequest, getContactsRequest, setAuthorization } from "../redux/actions";
+import {
+    authorizationRequest,
+    getContactsRequest,
+    removeContactRequest,
+    setAuthorization
+} from "../redux/actions";
 
 import { App } from "../components/App";
 import { Authorization } from "../components/Authorization";
 
 
-const AppContainer = ({auth, handleSetAuthorization, handleAuthorizationRequest, contacts, handleGetContactsRequest, handleEditContactRequest}) => {
-
+const AppContainer = ({auth, handleSetAuthorization, handleAuthorizationRequest, contacts, handleGetContactsRequest, handleRemoveContactRequest}) => {
+    const localUser = JSON.parse(localStorage.getItem('auth'));
+    
     useEffect(() => {
-        const localUser = JSON.parse(localStorage.getItem('auth'));
-
         if (!auth && localUser) {
             handleSetAuthorization(localUser);
         }
-    }, [auth, handleSetAuthorization]);
+    }, [auth, handleSetAuthorization, localUser]);
     
     useEffect(() => {
         if (auth && !contacts) {
@@ -24,9 +28,9 @@ const AppContainer = ({auth, handleSetAuthorization, handleAuthorizationRequest,
     }, [auth, contacts, handleGetContactsRequest]);
 
 
-    if (auth) {
+    if (auth || localUser) {
         return (
-            <App contacts={contacts}/>
+            <App contacts={contacts} handleRemoveContactRequest={handleRemoveContactRequest}/>
         );
     } else {
         return (
@@ -44,7 +48,7 @@ const mapDispatchToProps = (dispatch) => ({
     handleSetAuthorization: (user) => dispatch(setAuthorization(user)),
     handleAuthorizationRequest: (data) => dispatch(authorizationRequest(data)),
     handleGetContactsRequest: () => dispatch(getContactsRequest()),
-    handleEditContactRequest: (data) => dispatch(editContactRequest(data))
+    handleRemoveContactRequest: (id) => dispatch(removeContactRequest(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

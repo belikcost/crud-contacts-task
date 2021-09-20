@@ -23,10 +23,28 @@
     border-radius: 30px;
     padding: 32px;
     width: 50%;
+    position: relative;
   }
   &_icon {
     width: 20px;
     margin-right: 10px;
     cursor: pointer;
+  }
+  &_add {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 24px;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    &,&:hover {
+      color: #fff;
+    }
   }
 }

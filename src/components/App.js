@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 
 
-export const App = ({contacts}) => {
+export const App = ({contacts, handleRemoveContactRequest}) => {
 
     return (
         <div className="app app_background">
@@ -17,9 +17,12 @@ export const App = ({contacts}) => {
                     <Redirect to="/contacts"/>
                 </Route>
                 <Route exact path="/contacts">
-                    <Contacts contacts={contacts}/>
+                    <Contacts contacts={contacts} handleRemoveContact={handleRemoveContactRequest}/>
                 </Route>
-                <Route path="/contacts/:id">
+                <Route exact path="/contacts/edit/:id">
+                    <FormContactContainer/>
+                </Route>
+                <Route path="/contacts/create">
                     <FormContactContainer/>
                 </Route>
             </Switch>
