@@ -6,13 +6,15 @@
   &_background {
     background: linear-gradient(255.35deg, #319adc 0.83%, rgba(255, 79, 79, 0) 108.93%), #56b3ff;
   }
+  &_modal {
+    background: #fff;
+    border-radius: 30px;
+    padding: 32px;
+    width: 50%;
+  }
 }
 
 .auth {
-  background: #fff;
-  border-radius: 30px;
-  padding: 32px;
-  width: 50%;
   button {
     border: none;
   }

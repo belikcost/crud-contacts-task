@@ -1,10 +1,10 @@
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, ListGroup, Spinner } from "react-bootstrap";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 
 
-export const App = ({auth, handleAuthorizationRequest}) => {
+export const App = ({auth, handleAuthorizationRequest, contacts}) => {
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -14,11 +14,25 @@ export const App = ({auth, handleAuthorizationRequest}) => {
     return (
         <div className="app app_background">
             {auth ? (
-                <div>
-                    Контакты
+                <div className="app_modal">
+                    <h3>Контакты</h3>
+                    {contacts ? contacts.length !== 0 ? (
+                        <ListGroup variant="flush">
+                            {contacts.map(contact => (
+                                <ListGroup.Item key={contact.id}>
+                                    <h5>{contact.title}</h5>
+                                    <p>{contact.phone}</p>
+                                </ListGroup.Item>
+                            ))}
+                        </ListGroup>
+                    ) : (
+                        <p>Список контактов пуст</p>
+                    ) : (
+                        <Spinner animation="border" variant="primary" />
+                    )}
                 </div>
             ) : (
-                <Form className="auth" onSubmit={onSubmit}>
+                <Form className="app_modal auth" onSubmit={onSubmit}>
                     <Form.Group className="mb-3">
                         <Form.Label>Логин</Form.Label>
                         <Form.Control type="text" placeholder="Введите логин" required/>

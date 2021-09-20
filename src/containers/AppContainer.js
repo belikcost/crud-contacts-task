@@ -1,12 +1,12 @@
+import { useEffect } from "react";
 import { connect } from "react-redux";
 
-import { authorizationRequest, setAuthorization } from "../redux/actions";
+import { authorizationRequest, getContactsRequest, setAuthorization } from "../redux/actions";
 
 import { App } from "../components/App";
-import { useEffect } from "react";
 
 
-const AppContainer = ({auth, handleSetAuthorization, handleAuthorizationRequest}) => {
+const AppContainer = ({auth, handleSetAuthorization, handleAuthorizationRequest, contacts, handleGetContactsRequest}) => {
 
     useEffect(() => {
         const localUser = JSON.parse(localStorage.getItem('auth'));
@@ -15,22 +15,31 @@ const AppContainer = ({auth, handleSetAuthorization, handleAuthorizationRequest}
             handleSetAuthorization(localUser);
         }
     }, [auth, handleSetAuthorization]);
+    
+    useEffect(() => {
+        if (auth && !contacts) {
+            handleGetContactsRequest();
+        }
+    }, [auth, contacts, handleGetContactsRequest]);
 
     return (
         <App
             auth={auth}
             handleAuthorizationRequest={handleAuthorizationRequest}
+            contacts={contacts}
         />
     );
 };
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
+    contacts: state.contacts
 });
 
 const mapDispatchToProps = (dispatch) => ({
     handleSetAuthorization: (user) => dispatch(setAuthorization(user)),
-    handleAuthorizationRequest: (data) => dispatch(authorizationRequest(data))
+    handleAuthorizationRequest: (data) => dispatch(authorizationRequest(data)),
+    handleGetContactsRequest: () => dispatch(getContactsRequest())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);
