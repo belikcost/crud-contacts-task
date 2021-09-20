@@ -1,0 +1,7 @@
+{
+  "auth": { "id": 1, "name": "user" },
+  "contacts": [
+    { "id": 1, "title": "my-phone", "phone": "+79956632198" },
+    { "id": 2, "title": "Elon Musk", "phone": "+999999999" }
+  ]
+}
